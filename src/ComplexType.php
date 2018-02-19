@@ -104,7 +104,7 @@ class ComplexType extends Type
 
             $comment = new PhpDocComment();
             $comment->setVar(PhpDocElementFactory::getVar($type, $name, ''));
-            $var = new PhpVariable('protected', $name, 'null', $comment);
+            $var = new PhpVariable('protected', $name, '', null);
             $this->class->addVariable($var);
 
             if (!$member->getNullable()) {
@@ -137,7 +137,7 @@ class ComplexType extends Type
                 $getterCode = '  return $this->' . $name . ';' . PHP_EOL;
             }
             $getter = new PhpFunction('public', 'get' . ucfirst($name), '', $getterCode, $getterComment);
-            $accessors[] = $getter;
+            //$accessors[] = $getter;
 
             $setterComment = new PhpDocComment();
             $setterComment->addParam(PhpDocElementFactory::getParam($type, $name, ''));
@@ -168,7 +168,7 @@ class ComplexType extends Type
                     $member->getNullable() && !empty($typeHint)
                 ),
                 $setterCode,
-                $setterComment
+                null
             );
             $accessors[] = $setter;
         }
@@ -182,7 +182,7 @@ class ComplexType extends Type
                 $this->config->get('constructorParamsDefaultToNull')
             ),
             $constructorSource,
-            $constructorComment
+            null
         );
         $this->class->addFunction($constructor);
 
