@@ -108,7 +108,7 @@ class PhpClass extends PhpElement
         $this->final = $final;
         $this->identifier = $identifier;
         $this->access = '';
-        $this->extends = $extends;
+        $this->extends = empty($extends) ? 'Entity' : $extends;
         $this->constants = array();
         $this->variables = array();
         $this->functions = array();
